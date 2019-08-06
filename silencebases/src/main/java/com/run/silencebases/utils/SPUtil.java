@@ -1,4 +1,4 @@
-package com.silencefly96.base.utils;
+package com.run.silencebases.utils;
 
 /**
  * Created by lfq on 03/07/2019.

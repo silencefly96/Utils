@@ -1,4 +1,4 @@
-package com.silencefly96.base.utils;
+package com.run.silencebases.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.silencefly96.base.view;
+package com.run.silencebases.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.silencefly96.base.R;
-import com.silencefly96.base.utils.DensityUtils;
+import com.run.silencebases.R;
+import com.run.silencebases.utils.DensityUtils;
 
 
 /**

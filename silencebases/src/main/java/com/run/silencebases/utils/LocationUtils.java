@@ -1,4 +1,4 @@
-package com.silencefly96.base.utils;
+package com.run.silencebases.utils;
 
 import android.Manifest;
 import android.content.Context;

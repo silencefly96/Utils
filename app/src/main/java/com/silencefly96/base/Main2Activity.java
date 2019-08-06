@@ -1,16 +1,16 @@
 package com.silencefly96.base;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Adapter;
 
-import com.silencefly96.base.base.BaseActivity;
-import com.silencefly96.base.base.BaseRecyclerAdapter;
-import com.silencefly96.base.base.ViewHolder;
+import com.run.silencebases.base.BaseActivity;
+import com.run.silencebases.base.BaseRecyclerAdapter;
+import com.run.silencebases.base.ViewHolder;
 import com.silencefly96.base.bean.DataInfo;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class Main2Activity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        recyclerView.setAdapter(new BaseRecyclerAdapter(R.layout.item_data_list, infos) {
+        BaseRecyclerAdapter adapter = new BaseRecyclerAdapter(R.layout.item_data_list, infos) {
             @Override
             public void convertView(ViewHolder viewHolder, Object itemObj) {
                 viewHolder.setText(R.id.order, ((DataInfo)itemObj).getOrder() + "");
@@ -55,7 +55,8 @@ public class Main2Activity extends BaseActivity {
                 viewHolder.setText(R.id.sex, ((DataInfo)itemObj).getSex());
                 viewHolder.setText(R.id.from, ((DataInfo)itemObj).getFrom());
             }
-        });
+        };
+        recyclerView.setAdapter(adapter);
 
     }
 

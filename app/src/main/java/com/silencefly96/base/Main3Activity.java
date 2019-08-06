@@ -1,15 +1,11 @@
 package com.silencefly96.base;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.silencefly96.base.base.BaseActivity;
-import com.silencefly96.base.view.MyOneLineView;
+import com.run.silencebases.base.BaseActivity;
+import com.run.silencebases.view.MyOneLineView;
 
 public class Main3Activity extends BaseActivity implements MyOneLineView.OnRootClickListener, MyOneLineView.OnArrowClickListener {
 

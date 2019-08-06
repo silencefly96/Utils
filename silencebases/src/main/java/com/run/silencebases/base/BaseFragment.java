@@ -1,4 +1,4 @@
-package com.silencefly96.base.base;
+package com.run.silencebases.base;
 
 import android.content.Context;
 import android.content.Intent;

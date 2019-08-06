@@ -1,7 +1,5 @@
 package com.silencefly96.base;
 
-import androidx.appcompat.widget.Toolbar;
-
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Color;
@@ -10,11 +8,11 @@ import android.location.LocationManager;
 import android.view.View;
 import android.widget.Button;
 
-import com.silencefly96.base.base.BaseActivity;
-import com.silencefly96.base.base.BaseDialogFragment;
-import com.silencefly96.base.base.ViewHolder;
+import com.run.silencebases.base.BaseActivity;
+import com.run.silencebases.base.BaseDialogFragment;
+import com.run.silencebases.base.ViewHolder;
 import com.silencefly96.base.bean.DataInfo;
-import com.silencefly96.base.utils.LocationUtils;
+import com.run.silencebases.utils.LocationUtils;
 
 import java.util.List;
 

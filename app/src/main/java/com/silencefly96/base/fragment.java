@@ -3,7 +3,7 @@ package com.silencefly96.base;
 import android.content.Context;
 import android.view.View;
 
-import com.silencefly96.base.base.BaseFragment;
+import com.run.silencebases.base.BaseFragment;
 
 public class fragment extends BaseFragment {
     @Override
