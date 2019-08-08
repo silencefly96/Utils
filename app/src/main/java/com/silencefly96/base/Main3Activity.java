@@ -1,8 +1,11 @@
 package com.silencefly96.base;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.run.silencebases.base.BaseActivity;
 import com.run.silencebases.view.MyOneLineView;
@@ -11,6 +14,10 @@ public class Main3Activity extends BaseActivity implements MyOneLineView.OnRootC
 
     private LinearLayout llRoot;
 
+    @Override
+    public void initParms(Bundle parms) {
+        setUseDefaultToolbar(false);
+    }
 
     @Override
     public int bindLayout() {
@@ -30,6 +37,12 @@ public class Main3Activity extends BaseActivity implements MyOneLineView.OnRootC
 
     @Override
     public void doBusiness(Context mContext) {
+
+        Toolbar toolbar = findViewById(R.id.toolbar2);
+        //toolbar.setLogo(R.drawable.ic_launcher_background);
+        toolbar.setTitle("活动3");
+        toolbar.setSubtitle("123");
+        setmToolbar(toolbar);
 
 
         //使用示例，通过Java代码来创建MyOnelineView

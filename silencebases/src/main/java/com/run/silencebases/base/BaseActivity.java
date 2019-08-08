@@ -35,12 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private TextView mToolbarSubTitle;
     /** ToolBar **/
     private Toolbar mToolbar;
+    /** 是否使用默认toolbar **/
+    private boolean isUseDefaultToolbar = true;
+    /** 是否使用toolbar返回键 **/
+    private boolean isShowBacking = true;
     /** 是否允许全屏 **/
     private boolean mAllowFullScreen = false;
     /** 是否禁止旋转屏幕 **/
     private boolean isAllowScreenRoate = false;
-    /** 当前Activity渲染的视图View **/
-    private View mContextView = null;
     /** 日志输出标志 **/
     protected final String TAG = this.getClass().getSimpleName();
 
@@ -56,6 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         //绑定视图，而不是布局
         View mView = bindView();
+        //当前Activity渲染的视图View
+        View mContextView = null;
         if (null == mView) {
             mContextView = LayoutInflater.from(this)
                     .inflate(bindLayout(), null);
@@ -81,23 +85,26 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
 
         //设置TOOLBAR相关
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
-        mToolbarSubTitle = (TextView) findViewById(R.id.toolbar_subtitle);
-        if (mToolbar != null) {
-            //将Toolbar显示到界面
-            setSupportActionBar(mToolbar);
-            mToolbar.setPadding(mToolbar.getPaddingLeft(),
-                    getStatusBarHeight(),
-                    mToolbar.getPaddingRight(),
-                    mToolbar.getPaddingBottom());
+        if (isUseDefaultToolbar) {
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+            mToolbarSubTitle = (TextView) findViewById(R.id.toolbar_subtitle);
+            if (mToolbar != null) {
+                //将Toolbar显示到界面
+                setSupportActionBar(mToolbar);
+                mToolbar.setPadding(mToolbar.getPaddingLeft(),
+                        getStatusBarHeight(),
+                        mToolbar.getPaddingRight(),
+                        mToolbar.getPaddingBottom());
+            }
+            if (mToolbarTitle != null) {
+                //getTitle()的值是activity的android:lable属性值
+                mToolbarTitle.setText(getTitle());
+                //设置默认的标题不显示
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
         }
-        if (mToolbarTitle != null) {
-            //getTitle()的值是activity的android:lable属性值
-            mToolbarTitle.setText(getTitle());
-            //设置默认的标题不显示
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+
 
         //初始化控件
         initView(mContextView);
@@ -174,6 +181,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [绑定布局]
      *
      * @return
+     * id
      */
     public abstract int bindLayout();
 
@@ -181,6 +189,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [初始化控件]
      *
      * @param view
+     * view
      */
     public abstract void initView(final View view);
 
@@ -270,30 +279,18 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 获取头部标题的TextView
-     * @return
+     * @return  TextView
      */
     public TextView getToolbarTitle(){
         return mToolbarTitle;
     }
+
     /**
      * 获取头部子标题的TextView
-     * @return
+     * @return TextView
      */
     public TextView getSubTitle(){
         return mToolbarSubTitle;
-    }
-
-    /**
-     * 设置头部标题
-     * @param title
-     */
-    public void setToolBarTitle(CharSequence title) {
-        if(mToolbarTitle != null){
-            mToolbarTitle.setText(title);
-        }else{
-            getToolbar().setTitle(title);
-            setSupportActionBar(getToolbar());
-        }
     }
 
     /**
@@ -302,7 +299,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @return androidx.appcompat.widget.Toolbar
      */
     public Toolbar getToolbar() {
-        return (Toolbar) findViewById(R.id.toolbar);
+        return mToolbar;
     }
 
     /**
@@ -310,21 +307,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     private void showBack(){
         //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
-        getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
-        getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-    }
-
-    /**
-     * 是否显示后退按钮,默认显示,可在子类重写该方法.
-     * @return
-     */
-    protected boolean isShowBacking(){
-        return true;
     }
 
     @Override
@@ -336,10 +325,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onStart() {
         super.onStart();
-        /**
-         * 判断是否有Toolbar,并默认显示返回按钮
-         */
-        if(null != getToolbar() && isShowBacking()){
+        if(null != mToolbar && isShowBacking){
             showBack();
         }
         Log.d(TAG, "onStart()");
@@ -372,6 +358,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * [简化Toast]
      * @param msg
+     * string
      */
     protected void showToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
@@ -380,15 +367,55 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * [简化Toast]
      * @param id
+     * 资源ID
      */
     protected void showToast(int id){
         Toast.makeText(this,id,Toast.LENGTH_SHORT).show();
     }
 
     /**
+     * 设置toolbar,提供对默认toolbar的代替
+     * @param mToolbar
+     * toolbar
+     */
+    public void setmToolbar(Toolbar mToolbar) {
+        this.mToolbar = mToolbar;
+        if (this.mToolbar != null) {
+            //将Toolbar显示到界面
+            setSupportActionBar(this.mToolbar);
+            this.mToolbar.setPadding(this.mToolbar.getPaddingLeft(),
+                    getStatusBarHeight(),
+                    this.mToolbar.getPaddingRight(),
+                    this.mToolbar.getPaddingBottom());
+            if (isShowBacking){
+                showBack();
+            }
+        }
+    }
+
+    /**
+     * 设置是否显示默认toolbar
+     * @param useDefaultToolbar
+     * true or false
+     */
+    public void setUseDefaultToolbar(boolean useDefaultToolbar) {
+        isUseDefaultToolbar = useDefaultToolbar;
+    }
+
+    /**
+     * 设置返回键
+     * @param showBacking
+     * true or false
+     */
+    public void setShowBacking(boolean showBacking) {
+        isShowBacking = showBacking;
+    }
+
+    /**
      * [是否允许全屏]
      *
      * @param allowFullScreen
+     * true or false
      */
     public void setAllowFullScreen(boolean allowFullScreen) {
         this.mAllowFullScreen = allowFullScreen;
@@ -398,6 +425,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [是否设置沉浸状态栏]
      *
      * @param isSetStatusBar
+     * true or false
      */
     public void setSteepStatusBar(boolean isSetStatusBar) {
         this.isSetStatusBar = isSetStatusBar;
@@ -407,6 +435,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [是否设置沉浸状态栏]
      *
      * @param isSetStatusBar
+     * true or false
      */
     public void setShowToolBar(boolean isSetStatusBar) {
         this.isSetStatusBar = isSetStatusBar;
@@ -416,6 +445,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [是否允许屏幕旋转]
      *
      * @param isAllowScreenRoate
+     * true or false
      */
     public void setScreenRoate(boolean isAllowScreenRoate) {
         this.isAllowScreenRoate = isAllowScreenRoate;
@@ -427,7 +457,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /** 权限申请
      * @param permissions
+     * 权限
      * @param listener
+     * 监听
      */
     protected void requestRunTimePermission(String[] permissions, PermissionListener listener) {
 

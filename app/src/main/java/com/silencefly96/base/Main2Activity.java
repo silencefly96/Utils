@@ -1,12 +1,11 @@
 package com.silencefly96.base;
 
+import android.content.Context;
+import android.view.View;
+
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.view.View;
-import android.widget.Adapter;
 
 import com.run.silencebases.base.BaseActivity;
 import com.run.silencebases.base.BaseRecyclerAdapter;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +24,10 @@ public class MainActivity extends BaseActivity{
     private Button button3;
     private Button button4;
 
+    @Override
+    public void initParms(Bundle parms) {
+        setShowBacking(false);
+    }
 
     @Override
     public int bindLayout() {
@@ -40,11 +45,6 @@ public class MainActivity extends BaseActivity{
     @Override
     public void initData() {
 
-    }
-
-    @Override
-    protected boolean isShowBacking() {
-        return false;
     }
 
     @Override
