@@ -1,6 +1,6 @@
 package com.silencefly96.base.bean;
 
-import com.run.silencebases.beans.MediumDataBean;
+import com.run.utils.beans.MediumDataBean;
 
 public class Character extends MediumDataBean {
 

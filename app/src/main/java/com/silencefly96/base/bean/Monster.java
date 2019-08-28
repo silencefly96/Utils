@@ -1,6 +1,6 @@
 package com.silencefly96.base.bean;
 
-import com.run.silencebases.beans.TailDataBean;
+import com.run.utils.beans.TailDataBean;
 
 public class Monster extends TailDataBean {
     private String name;

@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.run.silencebases.base.BaseActivity;
-import com.run.silencebases.base.BaseDialogFragment;
-import com.run.silencebases.base.ViewHolder;
+import com.run.utils.base.BaseActivity;
+import com.run.utils.base.BaseDialogFragment;
+import com.run.utils.base.ViewHolder;
 import com.silencefly96.base.bean.Character;
-import com.run.silencebases.utils.LocationUtils;
+import com.run.utils.utils.LocationUtils;
 
 import java.util.List;
 

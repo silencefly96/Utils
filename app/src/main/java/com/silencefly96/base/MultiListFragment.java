@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.run.silencebases.base.BaseFragment;
-import com.run.silencebases.base.BaseMultiRecyclerAdapter;
-import com.run.silencebases.base.ViewHolder;
-import com.run.silencebases.beans.MediumDataBean;
+import com.run.utils.base.BaseFragment;
+import com.run.utils.base.BaseMultiRecyclerAdapter;
+import com.run.utils.base.ViewHolder;
 import com.silencefly96.base.bean.Character;
 import com.silencefly96.base.bean.Monster;
 import com.silencefly96.base.bean.People;

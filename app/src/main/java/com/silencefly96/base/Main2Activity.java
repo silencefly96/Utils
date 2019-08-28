@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.run.silencebases.base.BaseActivity;
-import com.run.silencebases.base.BaseRecyclerAdapter;
-import com.run.silencebases.base.ViewHolder;
+import com.run.utils.base.BaseActivity;
+import com.run.utils.base.BaseRecyclerAdapter;
+import com.run.utils.base.ViewHolder;
 import com.silencefly96.base.bean.Character;
 
 import java.util.ArrayList;

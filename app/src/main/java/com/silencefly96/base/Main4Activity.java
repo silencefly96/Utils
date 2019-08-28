@@ -2,12 +2,11 @@ package com.silencefly96.base;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.run.silencebases.base.BaseActivity;
+import com.run.utils.base.BaseActivity;
 
 public class Main4Activity extends BaseActivity {
 

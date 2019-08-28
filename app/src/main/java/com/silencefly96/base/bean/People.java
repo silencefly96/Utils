@@ -1,6 +1,6 @@
 package com.silencefly96.base.bean;
 
-import com.run.silencebases.beans.HeadDataBean;
+import com.run.utils.beans.HeadDataBean;
 
 public class People extends HeadDataBean{
     private String sex;

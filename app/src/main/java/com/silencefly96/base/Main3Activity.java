@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.run.silencebases.base.BaseActivity;
-import com.run.silencebases.view.MyOneLineView;
+import com.run.utils.base.BaseActivity;
+import com.run.utils.view.MyOneLineView;
 
 public class Main3Activity extends BaseActivity implements MyOneLineView.OnRootClickListener, MyOneLineView.OnArrowClickListener {
 
