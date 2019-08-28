@@ -15,18 +15,30 @@ import androidx.recyclerview.widget.RecyclerView;
  *
  * ViewHolder主要是做一些与控件布局有关的操作 ，所有我们可以在这边简化一下获取控件对象的代码
  */
-public class ViewHolder extends RecyclerView.ViewHolder
-{
+public class ViewHolder extends RecyclerView.ViewHolder {
+
     private View mConvertView;
     private SparseArray<View> mViews;
 
-    public ViewHolder(View itemView)
-    {
+    /**
+     *
+     * @param itemView
+     * itemView
+     */
+    public ViewHolder(View itemView) {
+
         super(itemView);
         mViews = new SparseArray<>() ;
         mConvertView = itemView ;
     }
 
+    /**
+     *
+     * @param view
+     * view
+     * @return
+     * holder
+     */
     public static ViewHolder create(View view) {
         return new ViewHolder(view);
     }
@@ -34,8 +46,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 根据资源获取View对象
      * @param res
+     * 控件ID
      * @param <T>
+     * 类型
      * @return
+     * 控件
      */
     public <T extends View> T getView(@IdRes int res) {
 
@@ -50,8 +65,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 提供TextView和Button设置文本简化操作
      * @param idRes
+     * 控件ID
      * @param charSequence
+     * 字符串
      * @return
+     * holder
      */
     public ViewHolder setText(@IdRes int idRes , CharSequence charSequence) {
         View view = getView(idRes);
@@ -67,8 +85,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 提供TextView和Button设置文本颜色简化操作
      * @param idRes
+     * 控件ID
      * @param color
+     * 颜色
      * @return
+     * holder
      */
     public ViewHolder setTextColor(@IdRes int idRes , int color) {
         View view = getView(idRes);
@@ -84,8 +105,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置指定ViewId的背景颜色
      * @param idRes
+     * 控件ID
      * @param color
+     * 颜色
      * @return
+     * holder
      */
     public ViewHolder setBackgroundColor(@IdRes int idRes , int color) {
 
@@ -99,8 +123,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置指定ViewId的可见度
      * @param idRes
+     * 控件ID
      * @param visibility
+     * 可见度
      * @return
+     * holder
      */
     public ViewHolder setVisibility(@IdRes int idRes , @DrawableRes int visibility) {
 
@@ -113,8 +140,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置ImageView显示图片
      * @param idRes
+     * 控件ID
      * @param res
+     * 图片路径
      * @return
+     * holder
      */
     public ViewHolder setImageResource(@IdRes int idRes , @DrawableRes int res) {
         View view = getView(idRes);
@@ -128,8 +158,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置指定控件ID的点击事件
      * @param idRes
+     * 控件ID
      * @param listener
+     * 监听接口
      * @return
+     * holder
      */
     public ViewHolder setOnClickListener(@IdRes int idRes , View.OnClickListener listener) {
 
@@ -142,8 +175,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置指定控件ID的长按事件
      * @param idRes
+     * 控件ID
      * @param listener
+     * 监听接口
      * @return
+     * holder
      */
     public ViewHolder setOnLongClickListener(@IdRes int idRes , View.OnLongClickListener listener) {
         View view = getView(idRes);
@@ -155,8 +191,11 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 设置指定控件的TAG
      * @param idRes
+     * 控件ID
      * @param tag
+     * tag
      * @return
+     * holder
      */
     public ViewHolder setTag(@IdRes int idRes , Object tag) {
         View view = getView(idRes);
@@ -168,7 +207,9 @@ public class ViewHolder extends RecyclerView.ViewHolder
     /**
      * 获取指定控件的TAG
      * @param idRes
+     * 控件ID
      * @return
+     * holder
      */
     public Object getTag(@IdRes int idRes) {
         View view = getView(idRes);

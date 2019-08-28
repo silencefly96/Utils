@@ -37,4 +37,11 @@
         android:text="跳转到常用设置界面"
         />
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="在Fragment中使用多层列表"
+        />
+
 </LinearLayout>

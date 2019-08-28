@@ -1,5 +1,6 @@
 package com.run.silencebases.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,6 +25,7 @@ import com.run.silencebases.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
@@ -59,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         //绑定视图，而不是布局
         View mView = bindView();
         //当前Activity渲染的视图View
-        View mContextView = null;
+        View mContextView;
         if (null == mView) {
             mContextView = LayoutInflater.from(this)
                     .inflate(bindLayout(), null);
@@ -86,9 +88,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         //设置TOOLBAR相关
         if (isUseDefaultToolbar) {
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
-            mToolbarSubTitle = (TextView) findViewById(R.id.toolbar_subtitle);
+            mToolbar = findViewById(R.id.toolbar);
+            mToolbarTitle = findViewById(R.id.toolbar_title);
+            mToolbarSubTitle = findViewById(R.id.toolbar_subtitle);
             if (mToolbar != null) {
                 //将Toolbar显示到界面
                 setSupportActionBar(mToolbar);
@@ -101,7 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 //getTitle()的值是activity的android:lable属性值
                 mToolbarTitle.setText(getTitle());
                 //设置默认的标题不显示
-                getSupportActionBar().setDisplayShowTitleEnabled(false);
+                Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
             }
         }
 
@@ -122,6 +124,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * [沉浸状态栏]
      */
+    @SuppressLint("ObsoleteSdkInt")
     private void steepStatusBar() {
         //沉浸式状态栏，方式一
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -148,6 +151,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 利用反射获取状态栏高度
      * @return
+     * 状态栏高度
      */
     public int getStatusBarHeight() {
         int result = 0;
@@ -163,19 +167,21 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [初始化参数]
      *
      * @param parms
+     * Bundle parms
      */
 //    public abstract void initParms(Bundle parms);
-    public void initParms(Bundle parms){};
+    public void initParms(Bundle parms){}
 
     /**
      * [绑定视图]
      *
      * @return
+     * 绑定视图
      */
 //    public abstract View bindView();
     public View bindView(){
         return null;
-    };
+    }
 
     /**
      * [绑定布局]
@@ -204,8 +210,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [绑定控件]
      *
      * @param resId
-     *
+     * 资源ID
      * @return
+     * 对应view
      */
     protected    <T extends View> T $(int resId) {
         return (T) super.findViewById(resId);
@@ -214,13 +221,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * [设置监听]
      */
-    public void setListener(){};
+    public void setListener(){}
 
 
     /**
      * [View点击]
      */
-    public void widgetClick(View v){};
+    public void widgetClick(View v){}
 
     @Override
     public void onClick(View v) {
@@ -231,6 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [业务操作]
      *
      * @param mContext
+     * Context
      */
     public abstract void doBusiness(Context mContext);
 
@@ -240,6 +248,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [页面跳转]
      *
      * @param clz
+     * 类名
      */
     public void startActivity(Class<?> clz) {
         startActivity(new Intent(BaseActivity.this,clz));
@@ -249,7 +258,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [携带数据的页面跳转]
      *
      * @param clz
+     * 类名
      * @param bundle
+     * 数据
      */
     public void startActivity(Class<?> clz, Bundle bundle) {
         Intent intent = new Intent();
@@ -264,8 +275,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * [含有Bundle通过Class打开编辑界面]
      *
      * @param cls
+     * 类名
      * @param bundle
+     * 数据
      * @param requestCode
+     * 请求码
      */
     public void startActivityForResult(Class<?> cls, Bundle bundle,
                                        int requestCode) {
@@ -481,8 +495,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /** 申请结果
      * @param requestCode
+     * 请求码
      * @param permissions
+     * 权限组
      * @param grantResults
+     * 结果
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

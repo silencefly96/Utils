@@ -69,6 +69,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [绑定视图]
      *
      * @return
+     * view
      */
 //    public abstract View bindView();
     public View bindView(){
@@ -79,6 +80,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [绑定布局]
      *
      * @return
+     * 布局ID
      */
     public abstract int bindLayout();
 
@@ -86,6 +88,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [初始化控件]
      *
      * @param view
+     * fragment
      */
     public abstract void initView(final View view);
 
@@ -100,8 +103,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [绑定控件]
      *
      * @param resId
-     *
+     * 控件ID
      * @return
+     * view
      */
     protected    <T extends View> T $(int resId) {
         return (T) mContextView.findViewById(resId);
@@ -127,6 +131,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [业务操作]
      *
      * @param mContext
+     * context
      */
     public abstract void doBusiness(Context mContext);
 
@@ -136,6 +141,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [页面跳转]
      *
      * @param clz
+     * 类名
      */
     public void startActivity(Class<?> clz) {
         startActivity(new Intent(mActivity,clz));
@@ -145,7 +151,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [携带数据的页面跳转]
      *
      * @param clz
+     * 类名
      * @param bundle
+     * 数据
      */
     public void startActivity(Class<?> clz, Bundle bundle) {
         Intent intent = new Intent();
@@ -160,8 +168,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * [含有Bundle通过Class打开编辑界面]
      *
      * @param cls
+     * 类名
      * @param bundle
+     * 数据
      * @param requestCode
+     * 请求码
      */
     public void startActivityForResult(Class<?> cls, Bundle bundle,
                                        int requestCode) {
@@ -176,6 +187,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /**
      * [简化Toast]
      * @param msg
+     * 字符串
      */
     protected void showToast(String msg){
         Toast.makeText(mActivity,msg,Toast.LENGTH_SHORT).show();
@@ -184,6 +196,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /**
      * [简化Toast]
      * @param id
+     * 字符ID
      */
     protected void showToast(int id){
         Toast.makeText(mActivity,id,Toast.LENGTH_SHORT).show();
@@ -194,7 +207,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     /** 权限申请
      * @param permissions
+     * 权限组
      * @param listener
+     * 接口
      */
     protected void requestRunTimePermission(String[] permissions, BaseActivity.PermissionListener listener) {
 
@@ -215,8 +230,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     /** 申请结果
      * @param requestCode
+     * 请求码
      * @param permissions
+     * 权限组
      * @param grantResults
+     * 结果
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

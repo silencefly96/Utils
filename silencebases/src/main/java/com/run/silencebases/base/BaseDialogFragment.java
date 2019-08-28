@@ -47,7 +47,9 @@ public class BaseDialogFragment extends DialogFragment{
      *  构造函数
      *
      * @param mLayoutResId
+     * 布局ID
      * @param datasIn
+     * 输入数据
      */
     public BaseDialogFragment(@LayoutRes int mLayoutResId, Object datasIn) {
         this.mLayoutResId = mLayoutResId;
@@ -58,9 +60,13 @@ public class BaseDialogFragment extends DialogFragment{
      * 新建对话框方式，不能直接使用构造
      *
      * @param mLayoutResId
+     * 布局id
      * @param datasIn
+     * 输入数据
      * @param convertView
+     * 转换接口
      * @return
+     * 返回dialog
      */
     public static BaseDialogFragment newInstance(@LayoutRes int mLayoutResId, Object datasIn, OnConvertView convertView) {
         BaseDialogFragment dialog = new BaseDialogFragment(mLayoutResId, datasIn);
@@ -141,7 +147,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置背景昏暗度
      *
      * @param dimAmount
+     * 设置背景昏暗度
      * @return
+     * dialog
      */
     public BaseDialogFragment setDimAmout(@FloatRange(from = 0, to = 1) float dimAmount) {
         mDimAmount = dimAmount;
@@ -152,7 +160,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 是否显示底部
      *
      * @param alignBottom
+     * 是否显示底部
      * @return
+     * dialog
      */
     public BaseDialogFragment setAlignBottom(boolean alignBottom) {
         isAlignBottom = alignBottom;
@@ -163,7 +173,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 是否透明
      *
      * @param transparent
+     * 是否透明
      * @return
+     * dialog
      */
     public BaseDialogFragment setTransparent(boolean transparent) {
         this.isTransparent = transparent;
@@ -174,8 +186,11 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置宽高
      *
      * @param width
+     * 长度
      * @param height
+     * 高度
      * @return
+     * dialog
      */
     public BaseDialogFragment setSize(int width, int height) {
         mWidth = width;
@@ -187,7 +202,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置左右margin
      *
      * @param margin
+     * margin
      * @return
+     * dialog
      */
     public BaseDialogFragment setMargin(int margin) {
         mMargin = margin;
@@ -198,7 +215,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置进入退出动画
      *
      * @param animStyle
+     * anim
      * @return
+     * dialog
      */
     public BaseDialogFragment setAnimStyle(@StyleRes int animStyle) {
         mAnimStyle = animStyle;
@@ -209,7 +228,7 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置主题
      *
      * @param mThemeStyle
-     * @return
+     * style
      */
     public void setmThemeStyle(@StyleRes int mThemeStyle) {
         this.mThemeStyle = mThemeStyle;
@@ -219,7 +238,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置是否点击外部取消
      *
      * @param outCancel
+     * 是否点击外部取消
      * @return
+     * dialog
      */
     public BaseDialogFragment setOutCancel(boolean outCancel) {
         isCancelable = outCancel;
@@ -230,7 +251,7 @@ public class BaseDialogFragment extends DialogFragment{
      * 设置导出数据
      *
      * @param datasOut
-     * @return
+     * 导出数据
      */
     public void setDatasOut(Object datasOut) {
         this.datasOut = datasOut;
@@ -240,7 +261,9 @@ public class BaseDialogFragment extends DialogFragment{
      * 显示dialog
      *
      * @param manager
+     * manager
      * @return
+     * dialog
      */
     public BaseDialogFragment show(FragmentManager manager) {
         super.show(manager, String.valueOf(System.currentTimeMillis()));
@@ -282,13 +305,24 @@ public class BaseDialogFragment extends DialogFragment{
      * 获取屏幕宽度
      *
      * @param context
+     * context
      * @return
+     * width
      */
     public static int getScreenWidth(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return displayMetrics.widthPixels;
     }
 
+    /**
+     *
+     * @param context
+     * context
+     * @param dipValue
+     * dp
+     * @return
+     * px
+     */
     public static int dp2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);

@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.run.silencebases.base.BaseActivity;
 import com.run.silencebases.base.BaseDialogFragment;
 import com.run.silencebases.base.ViewHolder;
-import com.silencefly96.base.bean.DataInfo;
+import com.silencefly96.base.bean.Character;
 import com.run.silencebases.utils.LocationUtils;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity{
     private Button button2;
     private Button button3;
     private Button button4;
+    private Button button5;
 
     @Override
     public void initParms(Bundle parms) {
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity{
         button2 = $(R.id.button2);
         button3 = $(R.id.button3);
         button4 = $(R.id.button4);
+        button5 = $(R.id.button5);
     }
 
     @Override
@@ -53,6 +55,7 @@ public class MainActivity extends BaseActivity{
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+        button5.setOnClickListener(this);
     }
 
     @Override
@@ -103,22 +106,17 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.button3:
 
-                DataInfo info = new DataInfo();
-                info.setOrder(123);
-                info.setName("小智");
-                info.setOld("12");
-                info.setSex("boy");
-                info.setFrom("真新镇");
+                Character info = new Character("boy", 123,"小智", "12","真新镇");
 
                 BaseDialogFragment.newInstance(R.layout.item_data_dialog, info, new BaseDialogFragment.OnConvertView() {
                     @Override
                     public void convertView(final ViewHolder holder, BaseDialogFragment dialog, Object datasIn) {
 
-                        holder.setText(R.id.order, ((DataInfo)datasIn).getOrder() + "");
-                        holder.setText(R.id.name, ((DataInfo)datasIn).getName());
-                        holder.setText(R.id.old, ((DataInfo)datasIn).getOld());
-                        holder.setText(R.id.sex, ((DataInfo)datasIn).getSex());
-                        holder.setText(R.id.from, ((DataInfo)datasIn).getFrom());
+                        holder.setText(R.id.order, ((Character)datasIn).getOrder() + "");
+                        holder.setText(R.id.name, ((Character)datasIn).getName());
+                        holder.setText(R.id.old, ((Character)datasIn).getOld());
+                        holder.setText(R.id.sex, ((Character)datasIn).getSex());
+                        holder.setText(R.id.from, ((Character)datasIn).getFrom());
 
                         final boolean[] flag = {false};
                         holder.setOnClickListener(R.id.order, new View.OnClickListener() {
@@ -148,6 +146,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.button4:
                 startActivity(Main3Activity.class);
+                break;
+            case R.id.button5:
+                startActivity(Main4Activity.class);
                 break;
         }
 

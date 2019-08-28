@@ -25,8 +25,8 @@ import java.util.List;
  *
  *
  */
-public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
-{
+public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter {
+
     // each item layout res
     private int mItemLayoutRes;
     // total item data set
@@ -35,16 +35,23 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
     private ItemClickListener mItemClickListener ;
     private ItemLongClickListnener mItemLongClickListnener ;
 
-    public BaseRecyclerAdapter(@LayoutRes int mItemLayoutRes, List<?> items)
-    {
+    /**
+     *
+     * @param mItemLayoutRes
+     * 布局id
+     * @param items
+     * 填充数据
+     */
+    public BaseRecyclerAdapter(@LayoutRes int mItemLayoutRes, List<?> items){
+
         this.mItemLayoutRes = mItemLayoutRes;
         // 如果没有传入的数据 ，则自动创建一个空的集合 ，防止报空指针
         this.mItems = items ==null ? new ArrayList<>() : items;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+
         View view = LayoutInflater.from(parent.getContext()).inflate(mItemLayoutRes, parent,
                 false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -57,15 +64,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position){
+
         Object o = mItems.get(position);
         convertView((ViewHolder) holder,o);
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount(){
+
         return mItems.size();
     }
 
@@ -75,6 +82,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
     /**
      * init set item view listener
      * @param holder
+     * viewholder
      */
     private void initOnItemListener(final RecyclerView.ViewHolder holder) {
         if (mItemClickListener != null) {
@@ -106,6 +114,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
     /**
      * set item view click
      * @param listener
+     * 监听接口
      */
     public void setOnItemClickListener(ItemClickListener listener) {
         mItemClickListener = listener ;
@@ -114,6 +123,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter
     /**
      * set item view long click
      * @param listener
+     * 监听接口
      */
     public void setOnItemLongClickListener(ItemLongClickListnener listener) {
         mItemLongClickListnener = listener ;
