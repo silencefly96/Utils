@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.run.utils.base.BaseFragment;
 import com.run.utils.base.BaseMultiRecyclerAdapter;
+import com.run.utils.base.ThreeLayerListHelper;
 import com.run.utils.base.ViewHolder;
 import com.silencefly96.base.bean.Character;
 import com.silencefly96.base.bean.Monster;
@@ -128,9 +129,9 @@ public class MultiListFragment extends BaseFragment {
             public void onItemClick(View view, Object itemObj, int position) {
 
                 //方法一，直接数据操作，只能展开一项数据
-                BaseMultiRecyclerAdapter.sortDatas(datas, itemObj, peoples, characters, monsters);
+                ThreeLayerListHelper.sortDatas(datas, itemObj, peoples, characters, monsters);
                 //方法二，通过节点形式增删数据，能展开多多项
-                //BaseMultiRecyclerAdapter.sortDatasByNode(datas, itemObj, peoples, characters, monsters);
+                //ThreeLayerListHelper.sortDatasByNode(datas, itemObj, peoples, characters, monsters);
 
                 //做一些其他操作 - 例如：第三项Monster提示语
                 if (itemObj instanceof Monster){
