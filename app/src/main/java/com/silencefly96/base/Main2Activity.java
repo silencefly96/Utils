@@ -40,17 +40,16 @@ public class Main2Activity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        BaseRecyclerAdapter adapter = new BaseRecyclerAdapter(R.layout.item_data_list, infos) {
+        recyclerView.setAdapter(new BaseRecyclerAdapter<Character>(R.layout.item_data_list, infos) {
             @Override
-            public void convertView(ViewHolder viewHolder, Object itemObj) {
-                viewHolder.setText(R.id.order, ((Character)itemObj).getOrder() + "");
-                viewHolder.setText(R.id.name, ((Character)itemObj).getName());
-                viewHolder.setText(R.id.old, ((Character)itemObj).getOld());
-                viewHolder.setText(R.id.sex, ((Character)itemObj).getSex());
-                viewHolder.setText(R.id.from, ((Character)itemObj).getFrom());
+            public void convertView(ViewHolder viewHolder, Character item, int position) {
+                viewHolder.setText(R.id.order, item.getOrder() + "");
+                viewHolder.setText(R.id.name, item.getName());
+                viewHolder.setText(R.id.old, item.getOld());
+                viewHolder.setText(R.id.sex, item.getSex());
+                viewHolder.setText(R.id.from, item.getFrom());
             }
-        };
-        recyclerView.setAdapter(adapter);
+        });
 
     }
 

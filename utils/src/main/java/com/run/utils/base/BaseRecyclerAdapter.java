@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -25,35 +26,30 @@ import java.util.List;
  *
  *
  */
-public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter {
+public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
-    // each item layout res
-    private int mItemLayoutRes;
-    // total item data set
-    private List<?> mItems;
+    //布局
+    private final int mItemLayoutRes;
 
-    private ItemClickListener mItemClickListener ;
-    private ItemLongClickListnener mItemLongClickListnener ;
+    //数据
+    public List<T> mItems;
 
-    /**
-     *
-     * @param mItemLayoutRes
-     * 布局id
-     * @param items
-     * 填充数据
-     */
-    public BaseRecyclerAdapter(@LayoutRes int mItemLayoutRes, List<?> items){
+    //点击事件回调接口
+    private ItemClickListener<T> mItemClickListener ;
+    private ItemLongClickListnener<T> mItemLongClickListnener ;
 
+    public BaseRecyclerAdapter(@LayoutRes int mItemLayoutRes, List<T> items) {
         this.mItemLayoutRes = mItemLayoutRes;
         // 如果没有传入的数据 ，则自动创建一个空的集合 ，防止报空指针
-        this.mItems = items ==null ? new ArrayList<>() : items;
+        this.mItems = items == null ? new ArrayList<>() : items;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(mItemLayoutRes, parent, false);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(mItemLayoutRes, parent,
-                false);
+        //根据view创建多功能view holder
         ViewHolder viewHolder = new ViewHolder(view);
 
         // 初始化Item事件监听
@@ -62,80 +58,57 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter {
         return viewHolder;
     }
 
-
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position){
-
-        Object o = mItems.get(position);
-        convertView((ViewHolder) holder,o);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //获取数据
+        T item = mItems.get(position);
+        //绑定数据到布局
+        convertView(holder, item, position);
     }
 
     @Override
-    public int getItemCount(){
-
+    public int getItemCount() {
         return mItems.size();
     }
 
-    public abstract void convertView(ViewHolder viewHolder, Object itemObj) ;
+    //关键--外部将数据绑定到布局去
+    public abstract void convertView(ViewHolder viewHolder, T item, int position) ;
 
-
-    /**
-     * init set item view listener
-     * @param holder
-     * viewholder
-     */
-    private void initOnItemListener(final RecyclerView.ViewHolder holder) {
+    //设置点击事件
+    private void initOnItemListener(ViewHolder holder) {
         if (mItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Object o = mItems.get(holder.getLayoutPosition());
-                    mItemClickListener.onItemClick(v,o ,holder.getLayoutPosition());
-                }
+            //根布局点击事件
+            holder.itemView.setOnClickListener(v -> {
+                T o = mItems.get(holder.getLayoutPosition());
+                mItemClickListener.onItemClick(v, o , holder.getLayoutPosition());
             });
         }
 
         if (mItemLongClickListnener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
-            {
-                @Override
-                public boolean onLongClick(View v)
-                {
-                    Object o = mItems.get(holder.getLayoutPosition());
-                    mItemLongClickListnener.onItemLongClick(v,o,holder.getLayoutPosition());
-                    return true;
-                }
+            //根布局长按事件
+            holder.itemView.setOnLongClickListener(v -> {
+                T o = mItems.get(holder.getLayoutPosition());
+                mItemLongClickListnener.onItemLongClick(v, o, holder.getLayoutPosition());
+                return true;
             });
         }
     }
 
-    /**
-     * set item view click
-     * @param listener
-     * 监听接口
-     */
-    public void setOnItemClickListener(ItemClickListener listener) {
+
+    public void setOnItemClickListener(ItemClickListener<T> listener) {
         mItemClickListener = listener ;
     }
 
-    /**
-     * set item view long click
-     * @param listener
-     * 监听接口
-     */
-    public void setOnItemLongClickListener(ItemLongClickListnener listener) {
+    public void setOnItemLongClickListener(ItemLongClickListnener<T> listener) {
         mItemLongClickListnener = listener ;
     }
 
-
-    public interface ItemClickListener {
-        void onItemClick(View view ,Object itemObj , int position) ;
+    public interface ItemClickListener<T> {
+        void onItemClick(View view, T itemObj, int position) ;
     }
 
-    public interface ItemLongClickListnener {
-        void onItemLongClick(View view ,Object itemObj, int position) ;
+    public interface ItemLongClickListnener<T> {
+        void onItemLongClick(View view, T itemObj, int position) ;
     }
 
 }

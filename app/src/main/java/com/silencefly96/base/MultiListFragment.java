@@ -69,6 +69,16 @@ public class MultiListFragment extends BaseFragment {
         multiList.setLayoutManager(new LinearLayoutManager(mActivity));
         multiList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
         final BaseMultiRecyclerAdapter adapter = new BaseMultiRecyclerAdapter(datas) {
+
+            @Override
+            public int getItemViewType(int position) {
+                Object item = datas.get(position);
+                if (item instanceof People) return 0;
+                if (item instanceof Character) return 1;
+                if (item instanceof Monster) return 2;
+                return 0;
+            }
+
             @Override
             public int convertType(int viewType) {
                 switch (viewType){
@@ -81,15 +91,6 @@ public class MultiListFragment extends BaseFragment {
                         default:
                 }
                 return R.layout.item_people_list;
-            }
-
-            @Override
-            public int getItemViewType(int position) {
-                Object item = datas.get(position);
-                if (item instanceof People) return 0;
-                if (item instanceof Character) return 1;
-                if (item instanceof Monster) return 2;
-                return 0;
             }
 
             @Override
@@ -106,12 +107,7 @@ public class MultiListFragment extends BaseFragment {
                         viewHolder.setText(R.id.from, ((Character)itemObj).getFrom());
 
                         final String say = "我叫" + ((Character)itemObj).getName() + "请多关照！";
-                        viewHolder.setOnClickListener(R.id.name, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                showToast(say);
-                            }
-                        });
+                        viewHolder.setOnClickListener(R.id.name, view -> showToast(say));
                         break;
                     case 2:
                         viewHolder.setText(R.id.monster_name, ((Monster)itemObj).getName());
@@ -124,22 +120,19 @@ public class MultiListFragment extends BaseFragment {
         };
 
         //注意使用viewholder注册点击事件，第一项无点击效果，即点击事件在第一项中注册
-        adapter.setOnItemClickListener(new BaseMultiRecyclerAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(View view, Object itemObj, int position) {
+        adapter.setOnItemClickListener((view, itemObj, position) -> {
 
-                //方法一，直接数据操作，只能展开一项数据
-                ThreeLayerListHelper.sortDatas(datas, itemObj, peoples, characters, monsters);
-                //方法二，通过节点形式增删数据，能展开多多项
-                //ThreeLayerListHelper.sortDatasByNode(datas, itemObj, peoples, characters, monsters);
+            //方法一，直接数据操作，只能展开一项数据
+            ThreeLayerListHelper.sortDatas(datas, itemObj, peoples, characters, monsters);
+            //方法二，通过节点形式增删数据，能展开多项
+            //ThreeLayerListHelper.sortDatasByNode(datas, itemObj, peoples, characters, monsters);
 
-                //做一些其他操作 - 例如：第三项Monster提示语
-                if (itemObj instanceof Monster){
-                    showToast("这是" + ((Monster)itemObj).getBelong()
-                            + "的" + ((Monster)itemObj).getName());
-                }
-                adapter.notifyDataSetChanged();
+            //做一些其他操作 - 例如：第三项Monster提示语
+            if (itemObj instanceof Monster){
+                showToast("这是" + ((Monster)itemObj).getBelong()
+                        + "的" + ((Monster)itemObj).getName());
             }
+            adapter.notifyDataSetChanged();
         });
         multiList.setAdapter(adapter);
     }

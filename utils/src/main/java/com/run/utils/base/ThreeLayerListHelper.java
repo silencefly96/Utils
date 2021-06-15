@@ -14,7 +14,6 @@ public class ThreeLayerListHelper {
 
         List<Object> tempdatas = new ArrayList<>();
         if (itemObj instanceof HeadDataBean){
-            tempdatas.clear();
 
             //获取前向属性
             String headProperty = ((HeadDataBean)itemObj).getHeadProperty();
@@ -51,7 +50,6 @@ public class ThreeLayerListHelper {
         }
 
         if (itemObj instanceof MediumDataBean){
-            tempdatas.clear();
 
             //前向属性
             String headProperty = ((MediumDataBean)itemObj).getHeadProperty();
@@ -106,7 +104,7 @@ public class ThreeLayerListHelper {
     }
 
     //按节点整理数据，可以展开多条数据
-    private static List<Object> openedDatas = new ArrayList<>();
+    private static final List<Object> openedDatas = new ArrayList<>();
     public static void sortDatasByNode(List<Object> datas, Object itemObj, List<? extends HeadDataBean> headDatas, List<? extends MediumDataBean> mediumDatas, List<? extends TailDataBean> tailDatas){
         if (openedDatas.contains(itemObj)){
             removeChildDataByNode(datas, itemObj, headDatas, mediumDatas, tailDatas);
