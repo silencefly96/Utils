@@ -151,9 +151,9 @@ public class DateUtil {
     public static String yesterday(String time){
 
         Calendar calendar =Calendar.getInstance();
-        calendar.set(Integer.valueOf(DateUtil.getYear(time))
-                ,Integer.valueOf(DateUtil.getMouth(time)) - 1
-                ,Integer.valueOf(DateUtil.getDay(time)));
+        calendar.set(Integer.parseInt(DateUtil.getYear(time))
+                ,Integer.parseInt(DateUtil.getMouth(time)) - 1
+                ,Integer.parseInt(DateUtil.getDay(time)));
         calendar.add( Calendar.DATE, -1); //向前走一天
         Date date= calendar.getTime();
 
@@ -165,9 +165,9 @@ public class DateUtil {
     public static String tomorrow(String time){
 
         Calendar calendar =Calendar.getInstance();
-        calendar.set(Integer.valueOf(DateUtil.getYear(time))
-                ,Integer.valueOf(DateUtil.getMouth(time)) - 1
-                ,Integer.valueOf(DateUtil.getDay(time)));
+        calendar.set(Integer.parseInt(DateUtil.getYear(time))
+                ,Integer.parseInt(DateUtil.getMouth(time)) - 1
+                ,Integer.parseInt(DateUtil.getDay(time)));
         calendar.add( Calendar.DATE, 1); //向后走一天
         Date date= calendar.getTime();
 

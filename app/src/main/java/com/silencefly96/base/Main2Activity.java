@@ -44,8 +44,8 @@ public class Main2Activity extends BaseActivity {
             @Override
             public void convertView(ViewHolder viewHolder, Character item, int position) {
                 viewHolder.setText(R.id.order, item.getOrder() + "");
-                viewHolder.setText(R.id.name, item.getName());
-                viewHolder.setText(R.id.old, item.getOld());
+                viewHolder.setText(R.id.name, item.getName())
+                        .setText(R.id.old, item.getOld());
                 viewHolder.setText(R.id.sex, item.getSex());
                 viewHolder.setText(R.id.from, item.getFrom());
             }

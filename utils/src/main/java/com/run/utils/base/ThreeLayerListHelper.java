@@ -104,7 +104,7 @@ public class ThreeLayerListHelper {
     }
 
     //按节点整理数据，可以展开多条数据
-    private static final List<Object> openedDatas = new ArrayList<>();
+    private static final List<Object> openedDatas = new ArrayList<>();//已经展开的节点
     public static void sortDatasByNode(List<Object> datas, Object itemObj, List<? extends HeadDataBean> headDatas, List<? extends MediumDataBean> mediumDatas, List<? extends TailDataBean> tailDatas){
         if (openedDatas.contains(itemObj)){
             removeChildDataByNode(datas, itemObj, headDatas, mediumDatas, tailDatas);
@@ -149,6 +149,7 @@ public class ThreeLayerListHelper {
         List<Object> temp = new ArrayList<>();
         for (Object data : datas){
             temp.add(data);
+            //当前点后面加入
             if (data.equals(itemObj)){
                 temp.addAll(increments);
             }

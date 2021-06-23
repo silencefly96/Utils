@@ -19,8 +19,9 @@ public class LogUtil {
     public static final String startHead = "LogUtil - - - -";
 
     /** Log输出文件目录、文件名 */
-    private static String logDir = Environment.getExternalStorageDirectory().getPath()+"/logs/";
-    private static String logName = "log_" + DateUtil.yyyy_MM_dd() + ".txt";
+    private static final String logDir = Environment.getExternalStorageDirectory().getPath()+"/logs/";
+
+    private static final String logName = "log_" + DateUtil.yyyy_MM_dd() + ".txt";
 
     /**
      * 详细输出调试
